@@ -59,9 +59,9 @@ public class EmployeeController {
 
     @DeleteMapping("/delCom/{id}")
     public String deleteCompany(@PathVariable long id) {
-        Optional<Company> check = companyRepo.findById(id);
+        Optional<Company> companyExist = companyRepo.findById(id);
 
-        if(check.isPresent()){
+        if(companyExist.isPresent()){
             companyRepo.deleteById(id);
             return "Deleted";
         }
