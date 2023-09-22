@@ -12,7 +12,6 @@ public class Company {
      private String comName;
      private long comNumOfEmp;
      @OneToMany(mappedBy = "company" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
-     @JsonIgnore
      private List<Employee> employeeList;
 
     public long getComId() {

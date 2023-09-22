@@ -1,5 +1,6 @@
 package com.springboot.SpringBootRestApi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -11,6 +12,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long empId;
     @ManyToOne
+    @JsonIgnore
     private Company company;
     private String empName;
     private LocalDate empDateofJoin;
