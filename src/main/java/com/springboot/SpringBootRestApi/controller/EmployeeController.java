@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,6 +26,37 @@ public class EmployeeController {
     @GetMapping("/{id}/employees")
     public List<Employee> getEmployees(@PathVariable long id) {
         return companyRepo.findById(id).get().getEmployeeList();
+    }
+
+    // FOR INTEGRATION
+    @GetMapping("/employees")
+    public  List<Employee> getAllEmployees(){
+        return employeeRepo.findAll();
+    }
+
+    // FOR INTEGRATION
+    @DeleteMapping("/employees/{id}")
+    public void deleteEmployees(@PathVariable long id)
+    {
+        employeeRepo.deleteById(id);
+    }
+    
+    // FOR INTEGRATION
+    @PutMapping("/employees/{id}")
+    public Employee updateEmployee(@PathVariable("id") long id , @RequestBody Employee updateEmployee)
+    {
+        Optional<Employee> optionalEmployee = employeeRepo.findById(id);
+
+        if(optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            employee.setEmpName(updateEmployee.getEmpName());
+            employee.setSalary(updateEmployee.getSalary());
+            employee.setEmpDateofJoin(updateEmployee.getEmpDateofJoin());
+            return employeeRepo.save(employee);
+        }
+        else{
+            return null;
+        }
     }
 
     // GET EMPLOYEE BY ID IN A COMPANY

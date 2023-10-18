@@ -11,13 +11,12 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long empId;
-    @ManyToOne
-    @JsonIgnore
-    private Company company;
     private String empName;
     private LocalDate empDateofJoin;
     private long salary;
-
+    @ManyToOne
+    @JsonIgnore
+    private Company company;
     public Company getCompany() {
         return company;
     }
@@ -38,8 +37,7 @@ public class Employee {
         return empName;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setEmpName(String empName) {this.empName = empName;
     }
 
     public LocalDate getEmpDateofJoin() {

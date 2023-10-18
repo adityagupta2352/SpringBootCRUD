@@ -10,8 +10,11 @@ public class Company {
     //@Column(nullable = false)
      private long comId;
      private String comName;
+
+     // IN POSTMAN WE HAVE TO UPDATE
+     @Transient
      private long comNumOfEmp;
-     @OneToMany(mappedBy = "company" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
+     @OneToMany(mappedBy = "company" , cascade = CascadeType.ALL)
      private List<Employee> employeeList;
 
     public long getComId() {
@@ -31,7 +34,7 @@ public class Company {
     }
 
     public long getComNumOfEmp() {
-        return comNumOfEmp;
+        return employeeList != null ? employeeList.size() : 0;
     }
 
     public void setComNumOfEmp(long comNumOfEmp) {
